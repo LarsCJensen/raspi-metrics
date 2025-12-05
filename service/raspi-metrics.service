@@ -1,0 +1,16 @@
+[Unit]
+Description=Raspberry Pi Metrics Service (FastAPI + Poetry)
+After=network.target
+
+[Service]
+User=ljensen
+WorkingDirectory=/home/ljensen/raspi-metrics
+
+ExecStart=/home/ljensen/.local/bin/poetry run uvicorn raspi_metrics.app:app --host 0.0.0.0 --port 8081
+
+Restart=always
+RestartSec=5
+Environment="PYTHONUNBUFFERED=1"
+
+[Install]
+WantedBy=multi-user.target
